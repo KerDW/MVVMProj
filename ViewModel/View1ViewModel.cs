@@ -55,42 +55,124 @@ namespace MVVMPractica2.ViewModel
 
         private void Filter(String filter)
         {
-            contactesPopulate();
-            List<contacte> contactesFiltering = new List<contacte>();
-            switch (FilterChoice)
+            if (FilterChoice.StartsWith("c"))
             {
-                case "StartsWith":
-                    foreach (contacte c in contactes)
-                    {
-                        if (c.nom.ToLower().StartsWith(filter.ToLower()) || c.cognoms.ToLower().StartsWith(filter.ToLower()))
+                swapTable("Contacts");
+                contactesPopulate();
+                List<contacte> contactesFiltering = new List<contacte>();
+                switch (FilterChoice)
+                {
+                    case "contacteStartsWith":
+                        foreach (contacte c in contactes)
                         {
-                            contactesFiltering.Add(c);
+                            if (c.nom.ToLower().StartsWith(filter.ToLower()) || c.cognoms.ToLower().StartsWith(filter.ToLower()))
+                            {
+                                contactesFiltering.Add(c);
+                            }
                         }
-                    }
-                    break;
-                case "Contains":
-                    foreach (contacte c in contactes)
-                    {
-                        if (c.nom.ToLower().Contains(filter.ToLower()) || c.cognoms.ToLower().Contains(filter.ToLower()))
+                        break;
+                    case "contacteContains":
+                        foreach (contacte c in contactes)
                         {
-                            contactesFiltering.Add(c);
+                            if (c.nom.ToLower().Contains(filter.ToLower()) || c.cognoms.ToLower().Contains(filter.ToLower()))
+                            {
+                                contactesFiltering.Add(c);
+                            }
                         }
-                    }
-                    break;
-                case "EndsWith":
-                    foreach (contacte c in contactes)
-                    {
-                        if (c.nom.ToLower().EndsWith(filter.ToLower()) || c.cognoms.ToLower().EndsWith(filter.ToLower()))
+                        break;
+                    case "contacteEndsWith":
+                        foreach (contacte c in contactes)
                         {
-                            contactesFiltering.Add(c);
+                            if (c.nom.ToLower().EndsWith(filter.ToLower()) || c.cognoms.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                contactesFiltering.Add(c);
+                            }
                         }
-                    }
-                    break;
-                default:
-                    return;
+                        break;
+                    default:
+                        return;
+                }
+                contactes.Clear();
+                contactes.AddRange(contactesFiltering);
+            } else if (FilterChoice.StartsWith("e"))
+            {
+                swapTable("Emails");
+                emailsPopulate();
+                List<email> emailsFiltering = new List<email>();
+                switch (FilterChoice)
+                {
+                    case "emailStartsWith":
+                        foreach (email e in emails)
+                        {
+                            if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                emailsFiltering.Add(e);
+                            }
+                        }
+                        break;
+                    case "emailContains":
+                        foreach (email e in emails)
+                        {
+                            if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                emailsFiltering.Add(e);
+                            }
+                        }
+                        break;
+                    case "emailEndsWith":
+                        foreach (email e in emails)
+                        {
+                            if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                emailsFiltering.Add(e);
+                            }
+                        }
+                        break;
+                    default:
+                        return;
+                }
+                emails.Clear();
+                emails.AddRange(emailsFiltering);
+            } else
+            {
+                swapTable("Emails");
+                telefonsPopulate();
+                List<telefon> telefonsFiltering = new List<telefon>();
+                switch (FilterChoice)
+                {
+                    case "telefonStartsWith":
+                        foreach (telefon t in telefons)
+                        {
+                            if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                telefonsFiltering.Add(t);
+                            }
+                        }
+                        break;
+                    case "telefonContains":
+                        foreach (telefon t in telefons)
+                        {
+                            if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                telefonsFiltering.Add(t);
+                            }
+                        }
+                        break;
+                    case "telefonEndsWith":
+                        foreach (telefon t in telefons)
+                        {
+                            if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                            {
+                                telefonsFiltering.Add(t);
+                            }
+                        }
+                        break;
+                    default:
+                        return;
+                }
+                telefons.Clear();
+                telefons.AddRange(telefonsFiltering);
             }
-            contactes.Clear();
-            contactes.AddRange(contactesFiltering);
 
         }
 
@@ -340,7 +422,6 @@ namespace MVVMPractica2.ViewModel
 
         public void BtnFilterClick(string btName)
         {
-            Console.WriteLine(btName);
             FilterChoice = btName;
         }
         public void BtnTableClick(string btName)
@@ -432,7 +513,7 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
-        private string _filterchoice = "Contains";
+        private string _filterchoice = "contacteContains";
         public string FilterChoice
         {
             get { return _filterchoice; }
