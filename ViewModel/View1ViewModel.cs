@@ -53,10 +53,12 @@ namespace MVVMPractica2.ViewModel
 
         }
 
-        private void Filter(String filter)
+        private void Filter()
         {
+            String filter = "";
             if (FilterChoice.StartsWith("c"))
             {
+                filter = TextFilter2;
                 swapTable("Contacts");
                 contactesPopulate();
                 List<contacte> contactesFiltering = new List<contacte>();
@@ -96,6 +98,7 @@ namespace MVVMPractica2.ViewModel
                 contactes.AddRange(contactesFiltering);
             } else if (FilterChoice.StartsWith("e"))
             {
+                filter = TextFilter;
                 swapTable("Emails");
                 emailsPopulate();
                 List<email> emailsFiltering = new List<email>();
@@ -135,7 +138,8 @@ namespace MVVMPractica2.ViewModel
                 emails.AddRange(emailsFiltering);
             } else
             {
-                swapTable("Emails");
+                filter = TextFilter1;
+                swapTable("Telefons");
                 telefonsPopulate();
                 List<telefon> telefonsFiltering = new List<telefon>();
                 switch (FilterChoice)
@@ -185,7 +189,7 @@ namespace MVVMPractica2.ViewModel
             {
                 _TextFilter = value;
                 NotifyPropertyChanged();
-                Filter(TextFilter);
+                Filter();
             }
         }
         public const string TextFilterPropertyName1 = "TextFilter1";
@@ -197,7 +201,7 @@ namespace MVVMPractica2.ViewModel
             {
                 _TextFilter1 = value;
                 NotifyPropertyChanged();
-                Filter(TextFilter1);
+                Filter();
             }
         }
         public const string TextFilterPropertyName2 = "TextFilter2";
@@ -209,7 +213,7 @@ namespace MVVMPractica2.ViewModel
             {
                 _TextFilter2 = value;
                 NotifyPropertyChanged();
-                Filter(TextFilter2);
+                Filter();
             }
         }
 
@@ -521,7 +525,7 @@ namespace MVVMPractica2.ViewModel
             {
                 _filterchoice = value;
                 NotifyPropertyChanged();
-                Filter(TextFilter);
+                Filter();
             }
         }
     }
