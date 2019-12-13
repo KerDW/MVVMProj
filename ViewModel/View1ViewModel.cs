@@ -340,6 +340,7 @@ namespace MVVMPractica2.ViewModel
 
         public void BtnFilterClick(string btName)
         {
+            Console.WriteLine(btName);
             FilterChoice = btName;
         }
         public void BtnTableClick(string btName)
