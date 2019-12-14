@@ -97,7 +97,7 @@ namespace MVVMPractica2.ViewModel
                 }
             } catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             contactes.Clear();
             contactes.AddRange(contactesFiltering);
@@ -146,7 +146,7 @@ namespace MVVMPractica2.ViewModel
                 }
             } catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             emails.Clear();
             emails.AddRange(emailsFiltering);
@@ -194,7 +194,7 @@ namespace MVVMPractica2.ViewModel
                 }
             } catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             telefons.Clear();
             telefons.AddRange(telefonsFiltering);
