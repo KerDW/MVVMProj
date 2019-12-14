@@ -19,7 +19,9 @@ namespace MVVMPractica2.ViewModel
         public View1ViewModel()
         {
             contactesPopulate();
-            BtnFilterCommand = new RelayCommand<string>(BtnFilterClick);
+            BtnFilterContacteCommand = new RelayCommand<string>(BtnFilterContacteClick);
+            BtnFilterTelefonCommand = new RelayCommand<string>(BtnFilterTelefonClick);
+            BtnFilterEmailCommand = new RelayCommand<string>(BtnFilterEmailClick);
             BtnTableCommand = new RelayCommand<string>(BtnTableClick);
         }
 
@@ -53,167 +55,167 @@ namespace MVVMPractica2.ViewModel
 
         }
 
-        private void Filter()
+        private void FilterContactes()
         {
-            String filter = "";
-            if (FilterChoice.StartsWith("c"))
+            string filter = TextFilterContacte;
+            swapTable("Contacts");
+            contactesPopulate();
+            List<contacte> contactesFiltering = new List<contacte>();
+            switch (FilterChoiceContacte)
             {
-                filter = TextFilter2;
-                swapTable("Contacts");
-                contactesPopulate();
-                List<contacte> contactesFiltering = new List<contacte>();
-                switch (FilterChoice)
-                {
-                    case "contacteStartsWith":
-                        foreach (contacte c in contactes)
+                case "contacteStartsWith":
+                    foreach (contacte c in contactes)
+                    {
+                        if (c.nom.ToLower().StartsWith(filter.ToLower()) || c.cognoms.ToLower().StartsWith(filter.ToLower()))
                         {
-                            if (c.nom.ToLower().StartsWith(filter.ToLower()) || c.cognoms.ToLower().StartsWith(filter.ToLower()))
-                            {
-                                contactesFiltering.Add(c);
-                            }
+                            contactesFiltering.Add(c);
                         }
-                        break;
-                    case "contacteContains":
-                        foreach (contacte c in contactes)
+                    }
+                    break;
+                case "contacteContains":
+                    foreach (contacte c in contactes)
+                    {
+                        if (c.nom.ToLower().Contains(filter.ToLower()) || c.cognoms.ToLower().Contains(filter.ToLower()))
                         {
-                            if (c.nom.ToLower().Contains(filter.ToLower()) || c.cognoms.ToLower().Contains(filter.ToLower()))
-                            {
-                                contactesFiltering.Add(c);
-                            }
+                            contactesFiltering.Add(c);
                         }
-                        break;
-                    case "contacteEndsWith":
-                        foreach (contacte c in contactes)
+                    }
+                    break;
+                case "contacteEndsWith":
+                    foreach (contacte c in contactes)
+                    {
+                        if (c.nom.ToLower().EndsWith(filter.ToLower()) || c.cognoms.ToLower().EndsWith(filter.ToLower()))
                         {
-                            if (c.nom.ToLower().EndsWith(filter.ToLower()) || c.cognoms.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                contactesFiltering.Add(c);
-                            }
+                            contactesFiltering.Add(c);
                         }
-                        break;
-                    default:
-                        return;
-                }
-                contactes.Clear();
-                contactes.AddRange(contactesFiltering);
-            } else if (FilterChoice.StartsWith("e"))
-            {
-                filter = TextFilter;
-                swapTable("Emails");
-                emailsPopulate();
-                List<email> emailsFiltering = new List<email>();
-                switch (FilterChoice)
-                {
-                    case "emailStartsWith":
-                        foreach (email e in emails)
-                        {
-                            if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                emailsFiltering.Add(e);
-                            }
-                        }
-                        break;
-                    case "emailContains":
-                        foreach (email e in emails)
-                        {
-                            if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                emailsFiltering.Add(e);
-                            }
-                        }
-                        break;
-                    case "emailEndsWith":
-                        foreach (email e in emails)
-                        {
-                            if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                emailsFiltering.Add(e);
-                            }
-                        }
-                        break;
-                    default:
-                        return;
-                }
-                emails.Clear();
-                emails.AddRange(emailsFiltering);
-            } else
-            {
-                filter = TextFilter1;
-                swapTable("Telefons");
-                telefonsPopulate();
-                List<telefon> telefonsFiltering = new List<telefon>();
-                switch (FilterChoice)
-                {
-                    case "telefonStartsWith":
-                        foreach (telefon t in telefons)
-                        {
-                            if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                telefonsFiltering.Add(t);
-                            }
-                        }
-                        break;
-                    case "telefonContains":
-                        foreach (telefon t in telefons)
-                        {
-                            if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                telefonsFiltering.Add(t);
-                            }
-                        }
-                        break;
-                    case "telefonEndsWith":
-                        foreach (telefon t in telefons)
-                        {
-                            if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
-                            {
-                                telefonsFiltering.Add(t);
-                            }
-                        }
-                        break;
-                    default:
-                        return;
-                }
-                telefons.Clear();
-                telefons.AddRange(telefonsFiltering);
+                    }
+                    break;
+                default:
+                    return;
             }
+            contactes.Clear();
+            contactes.AddRange(contactesFiltering);
 
         }
 
-        public const string TextFilterPropertyName = "TextFilter";
-        private string _TextFilter = "";
-        public string TextFilter
+        private void FilterEmails()
         {
-            get { return _TextFilter; }
+            string filter = TextFilterEmail;
+            swapTable("Emails");
+            emailsPopulate();
+            List<email> emailsFiltering = new List<email>();
+            switch (FilterChoiceEmail)
+            {
+                case "emailStartsWith":
+                    foreach (email e in emails)
+                    {
+                        if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                        {
+                            emailsFiltering.Add(e);
+                        }
+                    }
+                    break;
+                case "emailContains":
+                    foreach (email e in emails)
+                    {
+                        if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                        {
+                            emailsFiltering.Add(e);
+                        }
+                    }
+                    break;
+                case "emailEndsWith":
+                    foreach (email e in emails)
+                    {
+                        if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                        {
+                            emailsFiltering.Add(e);
+                        }
+                    }
+                    break;
+                default:
+                    return;
+            }
+            emails.Clear();
+            emails.AddRange(emailsFiltering);
+        }
+
+        private void FilterTelefons()
+        {
+            string filter = TextFilterTelefon;
+            swapTable("Telefons");
+            telefonsPopulate();
+            List<telefon> telefonsFiltering = new List<telefon>();
+            switch (FilterChoiceTelefon)
+            {
+                case "telefonStartsWith":
+                    foreach (telefon t in telefons)
+                    {
+                        if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                        {
+                            telefonsFiltering.Add(t);
+                        }
+                    }
+                    break;
+                case "telefonContains":
+                    foreach (telefon t in telefons)
+                    {
+                        if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                        {
+                            telefonsFiltering.Add(t);
+                        }
+                    }
+                    break;
+                case "telefonEndsWith":
+                    foreach (telefon t in telefons)
+                    {
+                        if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                        {
+                            telefonsFiltering.Add(t);
+                        }
+                    }
+                    break;
+                default:
+                    return;
+            }
+            telefons.Clear();
+            telefons.AddRange(telefonsFiltering);
+        }
+
+        public const string TextFilterPropertyNameContacte = "TextFilterContacte";
+        private string _TextFilterContacte = "";
+        public string TextFilterContacte
+        {
+            get { return _TextFilterContacte; }
             set
             {
-                _TextFilter = value;
+                _TextFilterContacte = value;
                 NotifyPropertyChanged();
-                Filter();
+                FilterContactes();
             }
         }
-        public const string TextFilterPropertyName1 = "TextFilter1";
-        private string _TextFilter1 = "";
-        public string TextFilter1
+        public const string TextFilterPropertyNameEmail = "TextFilterEmail";
+        private string _TextFilterEmail = "";
+        public string TextFilterEmail
         {
-            get { return _TextFilter1; }
+            get { return _TextFilterEmail; }
             set
             {
-                _TextFilter1 = value;
+                _TextFilterEmail = value;
                 NotifyPropertyChanged();
-                Filter();
+                FilterEmails();
             }
         }
-        public const string TextFilterPropertyName2 = "TextFilter2";
-        private string _TextFilter2 = "";
-        public string TextFilter2
+        public const string TextFilterPropertyNameTelefon = "TextFilterTelefon";
+        private string _TextFilterTelefon = "";
+        public string TextFilterTelefon
         {
-            get { return _TextFilter2; }
+            get { return _TextFilterTelefon; }
             set
             {
-                _TextFilter2 = value;
+                _TextFilterTelefon = value;
                 NotifyPropertyChanged();
-                Filter();
+                FilterTelefons();
             }
         }
 
@@ -424,10 +426,19 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
-        public void BtnFilterClick(string btName)
+        public void BtnFilterContacteClick(string btName)
         {
-            FilterChoice = btName;
+            FilterChoiceContacte = btName;
         }
+        public void BtnFilterTelefonClick(string btName)
+        {
+            FilterChoiceTelefon = btName;
+        }
+        public void BtnFilterEmailClick(string btName)
+        {
+            FilterChoiceEmail = btName;
+        }
+
         public void BtnTableClick(string btName)
         {
             TableChoice = btName;
@@ -502,7 +513,9 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
-        public RelayCommand<string> BtnFilterCommand { get; set; }
+        public RelayCommand<string> BtnFilterContacteCommand { get; set; }
+        public RelayCommand<string> BtnFilterTelefonCommand { get; set; }
+        public RelayCommand<string> BtnFilterEmailCommand { get; set; }
         public RelayCommand<string> BtnTableCommand { get; set; }
 
         private string _tableChoice = "Contacts";
@@ -517,15 +530,39 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
-        private string _filterchoice = "contacteContains";
-        public string FilterChoice
+        private string _filterChoiceContacte = "contacteContains";
+        public string FilterChoiceContacte
         {
-            get { return _filterchoice; }
+            get { return _filterChoiceContacte; }
             set
             {
-                _filterchoice = value;
+                _filterChoiceContacte = value;
                 NotifyPropertyChanged();
-                Filter();
+                FilterContactes();
+            }
+        }
+
+        private string _filterChoiceTelefon = "telefonContains";
+        public string FilterChoiceTelefon
+        {
+            get { return _filterChoiceTelefon; }
+            set
+            {
+                _filterChoiceTelefon = value;
+                NotifyPropertyChanged();
+                FilterTelefons();
+            }
+        }
+
+        private string _filterchoiceEmail = "emailContains";
+        public string FilterChoiceEmail
+        {
+            get { return _filterchoiceEmail; }
+            set
+            {
+                _filterchoiceEmail = value;
+                NotifyPropertyChanged();
+                FilterEmails();
             }
         }
     }
