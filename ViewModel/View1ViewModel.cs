@@ -109,7 +109,7 @@ namespace MVVMPractica2.ViewModel
                 case "emailStartsWith":
                     foreach (email e in emails)
                     {
-                        if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                        if (e.email1.ToLower().StartsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
                         {
                             emailsFiltering.Add(e);
                         }
@@ -118,7 +118,7 @@ namespace MVVMPractica2.ViewModel
                 case "emailContains":
                     foreach (email e in emails)
                     {
-                        if (e.email1.ToLower().EndsWith(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
+                        if (e.email1.ToLower().Contains(filter.ToLower()) || e.tipus.ToLower().EndsWith(filter.ToLower()))
                         {
                             emailsFiltering.Add(e);
                         }
@@ -151,7 +151,7 @@ namespace MVVMPractica2.ViewModel
                 case "telefonStartsWith":
                     foreach (telefon t in telefons)
                     {
-                        if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                        if (t.telefon1.ToLower().StartsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
                         {
                             telefonsFiltering.Add(t);
                         }
@@ -160,7 +160,7 @@ namespace MVVMPractica2.ViewModel
                 case "telefonContains":
                     foreach (telefon t in telefons)
                     {
-                        if (t.telefon1.ToLower().EndsWith(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
+                        if (t.telefon1.ToLower().Contains(filter.ToLower()) || t.tipus.ToLower().EndsWith(filter.ToLower()))
                         {
                             telefonsFiltering.Add(t);
                         }
