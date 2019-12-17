@@ -13,7 +13,7 @@
         <ViewModel:View1ViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid Name="emailsGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="496,106,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedEmail}" ItemsSource="{Binding emails}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index2}">
+        <DataGrid SelectionMode="Single" Name="emailsGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="496,106,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedEmail}" ItemsSource="{Binding emails}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index2}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Emails" Binding="{Binding email1}" />
                 <DataGridTextColumn Header="Tipus" Binding="{Binding tipus}"/>
@@ -26,11 +26,11 @@
         <RadioButton x:Name="emailEndsWith" GroupName="filtering" Content="EndsWith" HorizontalAlignment="Left" Margin="645,80,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource= {RelativeSource Self}}"/>
         <RadioButton x:Name="emailWithout" GroupName="filtering" Content="Without" HorizontalAlignment="Left" Margin="645,55,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource= {RelativeSource Self}}"/>
         <TextBox Text="{Binding TextFilterEmail, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="22" Margin="532,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="645,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69" Text="{Binding SelectedEmail.tipus}"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="496,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Text="{Binding SelectedEmail.email1}"/>
+        <TextBox Name="emailTipus" HorizontalAlignment="Left" Height="22" Margin="645,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69" Text="{Binding SelectedEmail.tipus"/>
+        <TextBox Name="emailEmail1" HorizontalAlignment="Left" Height="22" Margin="496,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Text="{Binding SelectedEmail.email1"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="494,357,0,0" VerticalAlignment="Top" />
         <Label Content="Tipus" HorizontalAlignment="Left" Margin="645,357,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="telefonsGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="258,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedTelefon}" ItemsSource="{Binding telefons}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index1}">
+        <DataGrid SelectionMode="Single" x:Name="telefonsGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="258,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedTelefon}" ItemsSource="{Binding telefons}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index1}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Telefons" Binding="{Binding telefon1}" />
                 <DataGridTextColumn Header="Tipus" Binding="{Binding tipus}"/>
@@ -47,7 +47,7 @@
         <TextBox HorizontalAlignment="Left" Height="22" Margin="258,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding SelectedTelefon.telefon1}"/>
         <Label Content="Telefon" HorizontalAlignment="Left" Margin="256,355,0,0" VerticalAlignment="Top" />
         <Label Content="Tipus" HorizontalAlignment="Left" Margin="352,355,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="contactesGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="17,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedContacte}" ItemsSource="{Binding contactes}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index}" >
+        <DataGrid SelectionMode="Single" x:Name="contactesGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="17,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedContacte}" ItemsSource="{Binding contactes}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index}" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding nom}" />
                 <DataGridTextColumn Header="Cognoms" Binding="{Binding cognoms}"/>
