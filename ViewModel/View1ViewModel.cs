@@ -106,7 +106,7 @@ namespace MVVMPractica2.ViewModel
                     db.emails.Add(e);
                     db.SaveChanges();
 
-                    if (TableChoice.Equals("Contacts"))
+                    if (TableChoice.Equals("Emails"))
                     {
                         emailsPopulate();
                     }
@@ -121,7 +121,7 @@ namespace MVVMPractica2.ViewModel
                     db.emails.Remove(e);
                     db.SaveChanges();
 
-                    if (TableChoice.Equals("Contacts"))
+                    if (TableChoice.Equals("Emails"))
                     {
                         emailsPopulate();
                     }else {
@@ -143,16 +143,48 @@ namespace MVVMPractica2.ViewModel
         }
         public void BtnTelefonClick(string btName)
         {
+            telefon t = new telefon();
             switch (btName)
             {
                 case "addTelefon":
+                    t.telefon1 = SelectedTelefon.telefon1;
+                    t.tipus = SelectedTelefon.tipus;
+                    t.contacteId = SelectedContacte.contacteId;
 
+                    db.telefons.Add(t);
+                    db.SaveChanges();
+
+                    if (TableChoice.Equals("Telefons"))
+                    {
+                        telefonsPopulate();
+                    }
+                    else
+                    {
+                        telefonsContacte();
+                    }
                     break;
                 case "removeTelefon":
+                    t = db.telefons.Find(SelectedTelefon.telId);
 
+                    db.telefons.Remove(t);
+                    db.SaveChanges();
+
+                    if (TableChoice.Equals("Telefons"))
+                    {
+                        telefonsPopulate();
+                    }
+                    else
+                    {
+                        telefonsContacte();
+                    }
                     break;
                 case "modifyTelefon":
+                    t = db.telefons.Find(SelectedTelefon.telId);
 
+                    t.telefon1 = SelectedTelefon.telefon1;
+                    t.tipus = SelectedTelefon.tipus;
+
+                    db.SaveChanges();
                     break;
                 default:
                     Console.WriteLine("Error");
