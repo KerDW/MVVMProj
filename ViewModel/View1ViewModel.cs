@@ -22,7 +22,144 @@ namespace MVVMPractica2.ViewModel
             BtnFilterContacteCommand = new RelayCommand<string>(BtnFilterContacteClick);
             BtnFilterTelefonCommand = new RelayCommand<string>(BtnFilterTelefonClick);
             BtnFilterEmailCommand = new RelayCommand<string>(BtnFilterEmailClick);
+
+            BtnContacteCommand = new RelayCommand<string>(BtnContacteClick);
+            BtnTelefonCommand = new RelayCommand<string>(BtnTelefonClick);
+            BtnEmailCommand = new RelayCommand<string>(BtnEmailClick);
+
             BtnTableCommand = new RelayCommand<string>(BtnTableClick);
+        }
+
+        public RelayCommand<string> BtnFilterContacteCommand { get; set; }
+        public RelayCommand<string> BtnFilterTelefonCommand { get; set; }
+        public RelayCommand<string> BtnFilterEmailCommand { get; set; }
+        public RelayCommand<string> BtnTableCommand { get; set; }
+        public RelayCommand<string> BtnContacteCommand { get; set; }
+        public RelayCommand<string> BtnEmailCommand { get; set; }
+        public RelayCommand<string> BtnTelefonCommand { get; set; }
+
+        public void BtnContacteClick(string btName)
+        {
+            switch (btName)
+            {
+                case "addContacte":
+
+                    break;
+                case "removeContacte":
+
+                    break;
+                case "modifyContacte":
+
+                    break;
+                case "duplicateContacte":
+
+                    break;
+                default:
+                    Console.WriteLine("Error");
+                    break;
+            }
+        }
+        public void BtnEmailClick(string btName)
+        {
+            switch (btName)
+            {
+                case "addEmail":
+
+                    break;
+                case "removeEmail":
+
+                    break;
+                case "modifyEmail":
+
+                    break;
+                default:
+                    Console.WriteLine("Error");
+                    break;
+            }
+        }
+        public void BtnTelefonClick(string btName)
+        {
+            switch (btName)
+            {
+                case "addTelefon":
+
+                    break;
+                case "removeTelefon":
+
+                    break;
+                case "modifyTelefon":
+
+                    break;
+                default:
+                    Console.WriteLine("Error");
+                    break;
+            }
+        }
+
+        public void BtnFilterContacteClick(string btName)
+        {
+            FilterChoiceContacte = btName;
+        }
+        public void BtnFilterTelefonClick(string btName)
+        {
+            FilterChoiceTelefon = btName;
+        }
+        public void BtnFilterEmailClick(string btName)
+        {
+            FilterChoiceEmail = btName;
+        }
+
+        public void BtnTableClick(string btName)
+        {
+            TableChoice = btName;
+        }
+
+        private string _tableChoice = "Contacts";
+        public string TableChoice
+        {
+            get { return _tableChoice; }
+            set
+            {
+                _tableChoice = value;
+                swapTable(value);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _filterChoiceContacte = "contacteContains";
+        public string FilterChoiceContacte
+        {
+            get { return _filterChoiceContacte; }
+            set
+            {
+                _filterChoiceContacte = value;
+                NotifyPropertyChanged();
+                FilterContactes();
+            }
+        }
+
+        private string _filterChoiceTelefon = "telefonContains";
+        public string FilterChoiceTelefon
+        {
+            get { return _filterChoiceTelefon; }
+            set
+            {
+                _filterChoiceTelefon = value;
+                NotifyPropertyChanged();
+                FilterTelefons();
+            }
+        }
+
+        private string _filterchoiceEmail = "emailContains";
+        public string FilterChoiceEmail
+        {
+            get { return _filterchoiceEmail; }
+            set
+            {
+                _filterchoiceEmail = value;
+                NotifyPropertyChanged();
+                FilterEmails();
+            }
         }
 
         private void swapTable(String which)
@@ -444,24 +581,6 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
-        public void BtnFilterContacteClick(string btName)
-        {
-            FilterChoiceContacte = btName;
-        }
-        public void BtnFilterTelefonClick(string btName)
-        {
-            FilterChoiceTelefon = btName;
-        }
-        public void BtnFilterEmailClick(string btName)
-        {
-            FilterChoiceEmail = btName;
-        }
-
-        public void BtnTableClick(string btName)
-        {
-            TableChoice = btName;
-        }
-
         public int _index { get; set; } = 0;
         public int index
         {
@@ -528,59 +647,6 @@ namespace MVVMPractica2.ViewModel
             {
                 _r2 = value;
                 NotifyPropertyChanged();
-            }
-        }
-
-        public RelayCommand<string> BtnFilterContacteCommand { get; set; }
-        public RelayCommand<string> BtnFilterTelefonCommand { get; set; }
-        public RelayCommand<string> BtnFilterEmailCommand { get; set; }
-        public RelayCommand<string> BtnTableCommand { get; set; }
-
-        private string _tableChoice = "Contacts";
-        public string TableChoice
-        {
-            get { return _tableChoice; }
-            set
-            {
-                _tableChoice = value;
-                swapTable(value);
-                NotifyPropertyChanged();
-            }
-        }
-
-        private string _filterChoiceContacte = "contacteContains";
-        public string FilterChoiceContacte
-        {
-            get { return _filterChoiceContacte; }
-            set
-            {
-                _filterChoiceContacte = value;
-                NotifyPropertyChanged();
-                FilterContactes();
-            }
-        }
-
-        private string _filterChoiceTelefon = "telefonContains";
-        public string FilterChoiceTelefon
-        {
-            get { return _filterChoiceTelefon; }
-            set
-            {
-                _filterChoiceTelefon = value;
-                NotifyPropertyChanged();
-                FilterTelefons();
-            }
-        }
-
-        private string _filterchoiceEmail = "emailContains";
-        public string FilterChoiceEmail
-        {
-            get { return _filterchoiceEmail; }
-            set
-            {
-                _filterchoiceEmail = value;
-                NotifyPropertyChanged();
-                FilterEmails();
             }
         }
     }
