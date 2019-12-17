@@ -38,6 +38,13 @@ namespace MVVMPractica2.ViewModel
         public RelayCommand<string> BtnEmailCommand { get; set; }
         public RelayCommand<string> BtnTelefonCommand { get; set; }
 
+        public void refreshTables()
+        {
+            contactesPopulate();
+            emailsPopulate();
+            telefonsPopulate();
+        }
+
         public void BtnContacteClick(string btName)
         {
             contacte c = new contacte();
@@ -88,16 +95,46 @@ namespace MVVMPractica2.ViewModel
         }
         public void BtnEmailClick(string btName)
         {
+            email e = new email();
             switch (btName)
             {
                 case "addEmail":
+                    e.email1 = SelectedEmail.email1;
+                    e.tipus = SelectedEmail.tipus;
+                    e.contacteId = SelectedContacte.contacteId;
 
+                    db.emails.Add(e);
+                    db.SaveChanges();
+
+                    if (TableChoice.Equals("Contacts"))
+                    {
+                        emailsPopulate();
+                    }
+                    else
+                    {
+                        emailsContacte();
+                    }
                     break;
                 case "removeEmail":
+                    e = db.emails.Find(SelectedEmail.emailId);
 
+                    db.emails.Remove(e);
+                    db.SaveChanges();
+
+                    if (TableChoice.Equals("Contacts"))
+                    {
+                        emailsPopulate();
+                    }else {
+                        emailsContacte();
+                    }
                     break;
                 case "modifyEmail":
+                    e = db.emails.Find(SelectedEmail.emailId);
 
+                    e.email1 = SelectedEmail.email1;
+                    e.tipus = SelectedEmail.tipus;
+
+                    db.SaveChanges();
                     break;
                 default:
                     Console.WriteLine("Error");
