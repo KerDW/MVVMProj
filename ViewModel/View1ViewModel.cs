@@ -40,19 +40,46 @@ namespace MVVMPractica2.ViewModel
 
         public void BtnContacteClick(string btName)
         {
+            contacte c = new contacte();
             switch (btName)
             {
                 case "addContacte":
-
+                    c.nom = SelectedContacte.nom;
+                    c.cognoms = SelectedContacte.cognoms;
+                    db.contactes.Add(c);
+                    db.SaveChanges();
+                    swapTable("Contacts");
                     break;
                 case "removeContacte":
+                    c = db.contactes.Find(SelectedContacte.contacteId);
 
+                    foreach (telefon t in db.telefons.Where(x => x.contacteId == c.contacteId))
+                    {
+                        db.telefons.Remove(t);
+                    }
+                    foreach (email e in db.emails.Where(x => x.contacteId == c.contacteId))
+                    {
+                        db.emails.Remove(e);
+                    }
+
+                    db.contactes.Remove(c);
+                    db.SaveChanges();
+                    contactesPopulate();
                     break;
                 case "modifyContacte":
-
+                    c = db.contactes.Find(SelectedContacte.contacteId);
+                    c.nom = SelectedContacte.nom;
+                    c.cognoms = SelectedContacte.cognoms;
+                    db.SaveChanges();
+                    contactesPopulate();
                     break;
                 case "duplicateContacte":
-
+                    // not working
+                    c = db.contactes.Find(SelectedContacte.contacteId);
+                    c.contacteId = 0;
+                    db.contactes.Add(c);
+                    db.SaveChanges();
+                    contactesPopulate();
                     break;
                 default:
                     Console.WriteLine("Error");
