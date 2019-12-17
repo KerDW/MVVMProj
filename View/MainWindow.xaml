@@ -20,7 +20,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Filtre" HorizontalAlignment="Left" Margin="496,49,0,0" VerticalAlignment="Top"/>
-        <RadioButton GroupName="tables" Content="Emails" HorizontalAlignment="Left" Margin="496,29,0,0" VerticalAlignment="Top" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+        <RadioButton GroupName="tables" Content="Emails" HorizontalAlignment="Left" Margin="496,29,0,0" VerticalAlignment="Top" IsChecked="{Binding EmailChecked}" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="emailStartsWith" GroupName="filtering" Content="StartsWith" HorizontalAlignment="Left" Margin="496,80,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="emailContains" GroupName="filtering" Content="Contains" HorizontalAlignment="Left" Margin="574,80,0,0" VerticalAlignment="Top" Width="71" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource= {RelativeSource Self}}" IsChecked="True"/>
         <RadioButton x:Name="emailEndsWith" GroupName="filtering" Content="EndsWith" HorizontalAlignment="Left" Margin="645,80,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource= {RelativeSource Self}}"/>
@@ -37,7 +37,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Filtre" HorizontalAlignment="Left" Margin="258,47,0,0" VerticalAlignment="Top"/>
-        <RadioButton GroupName="tables" Content="Telefons" HorizontalAlignment="Left" Margin="258,27,0,0" VerticalAlignment="Top" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+        <RadioButton GroupName="tables" Content="Telefons" HorizontalAlignment="Left" Margin="258,27,0,0" VerticalAlignment="Top" IsChecked="{Binding TelefonChecked}" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="telefonStartsWith" GroupName="filtering1" Content="StartsWith" HorizontalAlignment="Left" Margin="258,78,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="telefonContains" GroupName="filtering1" Content="Contains" HorizontalAlignment="Left" Margin="336,78,0,0" VerticalAlignment="Top" Width="70" Command="{Binding BtnFilterTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" IsChecked="True"/>
         <RadioButton x:Name="telefonEndsWith" GroupName="filtering1" Content="EndsWith" HorizontalAlignment="Left" Margin="406,78,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
@@ -54,7 +54,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Filtre" HorizontalAlignment="Left" Margin="17,47,0,0" VerticalAlignment="Top"/>
-        <RadioButton GroupName="tables" Content="Contacts" HorizontalAlignment="Left" Margin="17,27,0,0" VerticalAlignment="Top" IsChecked="True" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+        <RadioButton GroupName="tables" Content="Contacts" HorizontalAlignment="Left" Margin="17,27,0,0" VerticalAlignment="Top" IsChecked="{Binding ContacteChecked}" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="contacteStartsWith" GroupName="filtering2" Content="StartsWith" HorizontalAlignment="Left" Margin="17,78,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="contacteContains" GroupName="filtering2" Content="Contains" HorizontalAlignment="Left" Margin="95,78,0,0" VerticalAlignment="Top" Width="72" Command="{Binding BtnFilterContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" IsChecked="True"/>
         <RadioButton x:Name="contacteEndsWith" GroupName="filtering2" Content="EndsWith" HorizontalAlignment="Left" Margin="167,78,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>

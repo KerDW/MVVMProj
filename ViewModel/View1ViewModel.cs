@@ -48,7 +48,7 @@ namespace MVVMPractica2.ViewModel
                     c.cognoms = SelectedContacte.cognoms;
                     db.contactes.Add(c);
                     db.SaveChanges();
-                    swapTable("Contacts");
+                    TableChoice = "Contacts";
                     break;
                 case "removeContacte":
                     c = db.contactes.Find(SelectedContacte.contacteId);
@@ -201,16 +201,19 @@ namespace MVVMPractica2.ViewModel
                     contactesPopulate();
                     r = 0.1;
                     index = 0;
+                    ContacteChecked = true;
                     break;
                 case "Telefons":
                     telefonsPopulate();
                     r1 = 0.1;
                     index1 = 0;
+                    TelefonChecked = true;
                     break;
                 case "Emails":
                     emailsPopulate();
                     r2 = 0.1;
                     index2 = 0;
+                    EmailChecked = true;
                     break;
                 default:
                     Console.WriteLine("error");
@@ -222,7 +225,6 @@ namespace MVVMPractica2.ViewModel
         private void FilterContactes()
         {
             string filter = TextFilterContacte;
-            swapTable("Contacts");
             TableChoice = "Contacts";
             List<contacte> contactesFiltering = new List<contacte>();
             try
@@ -271,7 +273,6 @@ namespace MVVMPractica2.ViewModel
         private void FilterEmails()
         {
             string filter = TextFilterEmail;
-            swapTable("Emails");
             TableChoice = "Emails";
             List<email> emailsFiltering = new List<email>();
             try
@@ -319,7 +320,6 @@ namespace MVVMPractica2.ViewModel
         private void FilterTelefons()
         {
             string filter = TextFilterTelefon;
-            swapTable("Telefons");
             TableChoice = "Telefons";
             List<telefon> telefonsFiltering = new List<telefon>();
             try
@@ -607,6 +607,38 @@ namespace MVVMPractica2.ViewModel
                 // there was no selected email
             }
         }
+
+        private bool _contacteChecked { get; set; } = true;
+        public bool ContacteChecked
+        {
+            get { return _contacteChecked; }
+            set
+            {
+                _contacteChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _telefonChecked { get; set; } = false;
+        public bool TelefonChecked
+        {
+            get { return _telefonChecked; }
+            set
+            {
+                _telefonChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _emailChecked { get; set; } = false;
+        public bool EmailChecked
+        {
+            get { return _emailChecked; }
+            set
+            {
+                _emailChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public int _index { get; set; } = 0;
         public int index
