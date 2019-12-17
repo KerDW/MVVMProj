@@ -26,8 +26,8 @@
         <RadioButton x:Name="emailEndsWith" GroupName="filtering" Content="EndsWith" HorizontalAlignment="Left" Margin="645,80,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource= {RelativeSource Self}}"/>
         <RadioButton x:Name="emailWithout" GroupName="filtering" Content="Without" HorizontalAlignment="Left" Margin="645,55,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterEmailCommand}" CommandParameter="{Binding Name, RelativeSource= {RelativeSource Self}}"/>
         <TextBox Text="{Binding TextFilterEmail, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="22" Margin="532,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-        <TextBox Name="emailTipus" HorizontalAlignment="Left" Height="22" Margin="645,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69" Text="{Binding SelectedEmail.tipus"/>
-        <TextBox Name="emailEmail1" HorizontalAlignment="Left" Height="22" Margin="496,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Text="{Binding SelectedEmail.email1"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="645,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69" Text="{Binding emailTipus}"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="496,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Text="{Binding emailEmail1}"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="494,357,0,0" VerticalAlignment="Top" />
         <Label Content="Tipus" HorizontalAlignment="Left" Margin="645,357,0,0" VerticalAlignment="Top"/>
         <DataGrid SelectionMode="Single" x:Name="telefonsGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="258,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedTelefon}" ItemsSource="{Binding telefons}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index1}" IsReadOnly="True">
@@ -43,8 +43,8 @@
         <RadioButton x:Name="telefonEndsWith" GroupName="filtering1" Content="EndsWith" HorizontalAlignment="Left" Margin="406,78,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="telefonWithout" GroupName="filtering1" Content="Without" HorizontalAlignment="Left" Margin="406,53,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <TextBox Text="{Binding TextFilterTelefon, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="22" Margin="294,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="356,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Text="{Binding SelectedTelefon.tipus}"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="258,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding SelectedTelefon.telefon1}"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="356,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Text="{Binding telefonTipus}"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="258,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding telefonTelefon1}"/>
         <Label Content="Telefon" HorizontalAlignment="Left" Margin="256,355,0,0" VerticalAlignment="Top" />
         <Label Content="Tipus" HorizontalAlignment="Left" Margin="352,355,0,0" VerticalAlignment="Top"/>
         <DataGrid SelectionMode="Single" x:Name="contactesGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="17,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedContacte}" ItemsSource="{Binding contactes}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index}" IsReadOnly="True" >
@@ -60,8 +60,8 @@
         <RadioButton x:Name="contacteEndsWith" GroupName="filtering2" Content="EndsWith" HorizontalAlignment="Left" Margin="167,78,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <RadioButton x:Name="contacteWithout" GroupName="filtering2" Content="Without" HorizontalAlignment="Left" Margin="167,53,0,0" VerticalAlignment="Top" Command="{Binding BtnFilterContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         <TextBox Text="{Binding TextFilterContacte, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="22" Margin="53,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="117,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Text="{Binding SelectedContacte.cognoms}"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="17,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding SelectedContacte.nom}"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="117,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Text="{Binding contacteCognoms}"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="17,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding contacteNom}"/>
         <Label Content="Nom" HorizontalAlignment="Left" Margin="15,355,0,0" VerticalAlignment="Top" />
         <Label Content="Cognoms" HorizontalAlignment="Left" Margin="111,355,0,0" VerticalAlignment="Top"/>
         <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="386" Margin="10,448,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r}" Fill="Yellow"/>

@@ -532,6 +532,8 @@ namespace MVVMPractica2.ViewModel
             set
             {
                 _selectedContacte = value;
+                contacteNom = value != null ? value.nom : "";
+                contacteCognoms = value != null ? value.cognoms : "";
                 if (TableChoice.Equals("Contacts"))
                 {
                     emailsContacte();
@@ -552,6 +554,8 @@ namespace MVVMPractica2.ViewModel
             set
             {
                 _selectedEmail = value;
+                emailEmail1 = value != null ? value.email1 : "";
+                emailTipus = value != null ? value.tipus : "";
                 if (TableChoice.Equals("Emails"))
                 {
                     contacteEmails();
@@ -572,6 +576,8 @@ namespace MVVMPractica2.ViewModel
             set
             {
                 _selectedTelefon = value;
+                telefonTelefon1 = value != null ? value.telefon1 : "";
+                telefonTipus = value != null ? value.tipus : "";
                 if (TableChoice.Equals("Telefons"))
                 {
                     contacteTelefons();
@@ -704,6 +710,67 @@ namespace MVVMPractica2.ViewModel
             set
             {
                 _emailChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _contacteNom { get; set; } = "";
+        public string contacteNom
+        {
+            get { return _contacteNom; }
+            set
+            {
+                _contacteNom = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _contacteCognoms { get; set; } = "";
+        public string contacteCognoms
+        {
+            get { return _contacteCognoms; }
+            set
+            {
+                _contacteCognoms = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _emailEmail1 { get; set; } = "";
+        public string emailEmail1
+        {
+            get { return _emailEmail1; }
+            set
+            {
+                _emailEmail1 = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _emailTipus { get; set; } = "";
+        public string emailTipus
+        {
+            get { return _emailTipus; }
+            set
+            {
+                _emailTipus = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _telefonTelefon1 { get; set; } = "";
+        public string telefonTelefon1
+        {
+            get { return _telefonTelefon1; }
+            set
+            {
+                _telefonTelefon1 = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _telefonTipus { get; set; } = "";
+        public string telefonTipus
+        {
+            get { return _telefonTipus; }
+            set
+            {
+                _telefonTipus = value;
                 NotifyPropertyChanged();
             }
         }
