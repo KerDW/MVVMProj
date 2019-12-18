@@ -100,12 +100,33 @@ namespace MVVMPractica2.ViewModel
                     }
                     break;
                 case "duplicateContacte":
-                    // not working
                     c = db.contactes.Find(SelectedContacte.contacteId);
-                    c.contacteId = 0;
-                    db.contactes.Add(c);
-                    db.SaveChanges();
-                    contactesPopulate();
+                    contacte c0 = new contacte();
+                    int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault()+1;
+
+                    c0.nom = c.nom;
+                    c0.cognoms = c.cognoms;
+
+                    // collections arent duplicating
+                    
+                    //foreach(email e in c.emails.ToList())
+                    //{
+                    //    c0.emails.Add(e);
+                    //}
+
+                    //foreach(telefon t in c.telefons.ToList())
+                    //{
+                    //    telefon telefon0 = t;
+                    //    telefon0.contacteId = new_id;
+                    //    telefons0.Add(telefon0);
+                    //}
+
+                    //c0.telefons = telefons0;
+                    // c0.emails = emails0;
+
+                    //db.contactes.Add(c0);
+                    //db.SaveChanges();
+                    //TableChoice = "Contacts";
                     break;
                 default:
                     Console.WriteLine("Error");
