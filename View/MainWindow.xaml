@@ -8,7 +8,7 @@
         xmlns:ViewModel="clr-namespace:MVVMPractica2.ViewModel" 
         x:Class="MVVMPractica2.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="925.5" Width="762.5">
+        Title="MainWindow" Height="489" Width="762.5">
     <Window.DataContext>
         <ViewModel:View1ViewModel/>
     </Window.DataContext>
@@ -64,19 +64,19 @@
         <TextBox HorizontalAlignment="Left" Height="22" Margin="17,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding contacteNom}"/>
         <Label Content="Nom" HorizontalAlignment="Left" Margin="15,355,0,0" VerticalAlignment="Top" />
         <Label Content="Cognoms" HorizontalAlignment="Left" Margin="111,355,0,0" VerticalAlignment="Top"/>
-        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="386" Margin="10,448,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r}" Fill="Yellow"/>
-        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="387" Margin="258,447,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r1}" Fill="Yellow"/>
-        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="387" Margin="504,448,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r2}" Fill="Yellow"/>
-        
+        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="10,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r}" Fill="Yellow"/>
+        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="250,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r1}" Fill="Yellow"/>
+        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="496,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r2}" Fill="Yellow"/>
+
         <Button x:Name="addContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="25,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="removeContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Remove" HorizontalAlignment="Left" Margin="165,405,0,0" VerticalAlignment="Top" Width="72"/>
         <Button x:Name="modifyContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="95,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="duplicateContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Duplicate" HorizontalAlignment="Left" Margin="96,26,0,0" VerticalAlignment="Top" Width="65"/>
-        
+
         <Button x:Name="addTelefon" Command="{Binding BtnTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="266,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="removeTelefon" Command="{Binding BtnTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Remove" HorizontalAlignment="Left" Margin="406,405,0,0" VerticalAlignment="Top" Width="72"/>
         <Button x:Name="modifyTelefon" Command="{Binding BtnTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="336,405,0,0" VerticalAlignment="Top" Width="65"/>
-        
+
         <Button x:Name="addEmail" Command="{Binding BtnEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="504,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="removeEmail" Command="{Binding BtnEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Remove" HorizontalAlignment="Left" Margin="644,405,0,0" VerticalAlignment="Top" Width="72"/>
         <Button x:Name="modifyEmail" Command="{Binding BtnEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="574,405,0,0" VerticalAlignment="Top" Width="65"/>

@@ -327,19 +327,19 @@ namespace MVVMPractica2.ViewModel
             {
                 case "Contacts":
                     contactesPopulate();
-                    r = 0.1;
+                    r = 0.2;
                     index = 0;
                     ContacteChecked = true;
                     break;
                 case "Telefons":
                     telefonsPopulate();
-                    r1 = 0.1;
+                    r1 = 0.2;
                     index1 = 0;
                     TelefonChecked = true;
                     break;
                 case "Emails":
                     emailsPopulate();
-                    r2 = 0.1;
+                    r2 = 0.2;
                     index2 = 0;
                     EmailChecked = true;
                     break;
@@ -873,7 +873,7 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
-        public double _r { get; set; } = 0.1;
+        public double _r { get; set; } = 0.2;
         public double r
         {
             get { return _r; }
