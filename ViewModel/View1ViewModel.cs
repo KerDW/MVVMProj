@@ -51,8 +51,8 @@ namespace MVVMPractica2.ViewModel
             switch (btName)
             {
                 case "addContacte":
-                    c.nom = SelectedContacte.nom;
-                    c.cognoms = SelectedContacte.cognoms;
+                    c.nom = contacteNom;
+                    c.cognoms = contacteCognoms;
                     db.contactes.Add(c);
                     db.SaveChanges();
                     TableChoice = "Contacts";
@@ -71,14 +71,33 @@ namespace MVVMPractica2.ViewModel
 
                     db.contactes.Remove(c);
                     db.SaveChanges();
-                    contactesPopulate();
+
+                    if (TableChoice.Equals("Telefons"))
+                    {
+                        telefonsPopulate();
+                    } else if(TableChoice.Equals("Emails")) {
+                        emailsPopulate();
+                    } else {
+                        contactesPopulate();
+                    }
                     break;
                 case "modifyContacte":
                     c = db.contactes.Find(SelectedContacte.contacteId);
-                    c.nom = SelectedContacte.nom;
-                    c.cognoms = SelectedContacte.cognoms;
+                    c.nom = contacteNom;
+                    c.cognoms = contacteCognoms;
                     db.SaveChanges();
-                    contactesPopulate();
+                    if (TableChoice.Equals("Telefons"))
+                    {
+                        contacteTelefons();
+                    }
+                    else if (TableChoice.Equals("Emails"))
+                    {
+                        contacteEmails();
+                    }
+                    else
+                    {
+                        contactesPopulate();
+                    }
                     break;
                 case "duplicateContacte":
                     // not working
@@ -99,8 +118,8 @@ namespace MVVMPractica2.ViewModel
             switch (btName)
             {
                 case "addEmail":
-                    e.email1 = SelectedEmail.email1;
-                    e.tipus = SelectedEmail.tipus;
+                    e.email1 = emailEmail1;
+                    e.tipus = emailTipus;
                     e.contacteId = SelectedContacte.contacteId;
 
                     db.emails.Add(e);
@@ -131,10 +150,19 @@ namespace MVVMPractica2.ViewModel
                 case "modifyEmail":
                     e = db.emails.Find(SelectedEmail.emailId);
 
-                    e.email1 = SelectedEmail.email1;
-                    e.tipus = SelectedEmail.tipus;
+                    e.email1 = emailEmail1;
+                    e.tipus = emailTipus;
 
                     db.SaveChanges();
+
+                    if (TableChoice.Equals("Emails"))
+                    {
+                        emailsPopulate();
+                    }
+                    else
+                    {
+                        emailsContacte();
+                    }
                     break;
                 default:
                     Console.WriteLine("Error");
@@ -147,8 +175,8 @@ namespace MVVMPractica2.ViewModel
             switch (btName)
             {
                 case "addTelefon":
-                    t.telefon1 = SelectedTelefon.telefon1;
-                    t.tipus = SelectedTelefon.tipus;
+                    t.telefon1 = telefonTelefon1;
+                    t.tipus = telefonTipus;
                     t.contacteId = SelectedContacte.contacteId;
 
                     db.telefons.Add(t);
@@ -181,10 +209,19 @@ namespace MVVMPractica2.ViewModel
                 case "modifyTelefon":
                     t = db.telefons.Find(SelectedTelefon.telId);
 
-                    t.telefon1 = SelectedTelefon.telefon1;
-                    t.tipus = SelectedTelefon.tipus;
+                    t.telefon1 = telefonTelefon1;
+                    t.tipus = telefonTipus;
 
                     db.SaveChanges();
+
+                    if (TableChoice.Equals("Telefons"))
+                    {
+                        telefonsPopulate();
+                    }
+                    else
+                    {
+                        telefonsContacte();
+                    }
                     break;
                 default:
                     Console.WriteLine("Error");
