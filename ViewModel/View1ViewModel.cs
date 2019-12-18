@@ -107,26 +107,27 @@ namespace MVVMPractica2.ViewModel
                     c0.nom = c.nom;
                     c0.cognoms = c.cognoms;
 
-                    // collections arent duplicating
-                    
-                    //foreach(email e in c.emails.ToList())
-                    //{
-                    //    c0.emails.Add(e);
-                    //}
+                    foreach (email e in c.emails)
+                    {
+                        email email0 = new email();
+                        email0.email1 = e.email1;
+                        email0.tipus = e.tipus;
+                        email0.contacteId = new_id;
+                        c0.emails.Add(email0);
+                    }
 
-                    //foreach(telefon t in c.telefons.ToList())
-                    //{
-                    //    telefon telefon0 = t;
-                    //    telefon0.contacteId = new_id;
-                    //    telefons0.Add(telefon0);
-                    //}
+                    foreach (telefon t in c.telefons)
+                    {
+                        telefon telefon0 = new telefon();
+                        telefon0.telefon1 = t.telefon1;
+                        telefon0.tipus = t.tipus;
+                        telefon0.contacteId = new_id;
+                        c0.telefons.Add(telefon0);
+                    }
 
-                    //c0.telefons = telefons0;
-                    // c0.emails = emails0;
-
-                    //db.contactes.Add(c0);
-                    //db.SaveChanges();
-                    //TableChoice = "Contacts";
+                    db.contactes.Add(c0);
+                    db.SaveChanges();
+                    TableChoice = "Contacts";
                     break;
                 default:
                     Console.WriteLine("Error");
