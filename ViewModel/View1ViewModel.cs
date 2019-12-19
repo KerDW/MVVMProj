@@ -38,13 +38,6 @@ namespace MVVMPractica2.ViewModel
         public RelayCommand<string> BtnEmailCommand { get; set; }
         public RelayCommand<string> BtnTelefonCommand { get; set; }
 
-        public void refreshTables()
-        {
-            contactesPopulate();
-            emailsPopulate();
-            telefonsPopulate();
-        }
-
         public void BtnContacteClick(string btName)
         {
             contacte c = new contacte();
