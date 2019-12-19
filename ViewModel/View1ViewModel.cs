@@ -44,15 +44,11 @@ namespace MVVMPractica2.ViewModel
             switch (btName)
             {
                 case "addContacte":
-                    foreach(contacte co in contactes.Where(x => x.IsSelected))
-                    {
-                        Console.WriteLine(co.nom);
-                    }
-                    //c.nom = contacteNom;
-                    //c.cognoms = contacteCognoms;
-                    //db.contactes.Add(c);
-                    //db.SaveChanges();
-                    //TableChoice = "Contacts";
+                    c.nom = contacteNom;
+                    c.cognoms = contacteCognoms;
+                    db.contactes.Add(c);
+                    db.SaveChanges();
+                    TableChoice = "Contacts";
                     break;
                 case "removeContacte":
                     c = db.contactes.Find(SelectedContacte.contacteId);
@@ -900,6 +896,5 @@ namespace MVVMPractica2.ViewModel
                 NotifyPropertyChanged();
             }
         }
-        
     }
 }

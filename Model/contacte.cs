@@ -24,8 +24,7 @@ namespace MVVMPractica2.Model
         public int contacteId { get; set; }
         public string nom { get; set; }
         public string cognoms { get; set; }
-        public bool IsSelected { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<email> emails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
