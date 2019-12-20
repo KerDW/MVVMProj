@@ -70,25 +70,9 @@ namespace MVVMPractica2.ViewModel
 
                             db.contactes.Remove(co);
                         }
-                        db.SaveChanges();
-
-                        if (TableChoice.Equals("Telefons"))
-                        {
-                            telefonsPopulate();
-                        }
-                        else if (TableChoice.Equals("Emails"))
-                        {
-                            emailsPopulate();
-                        }
-                        else
-                        {
-                            contactesPopulate();
-                        }
 
                         multipleSel = false;
-                    }
-                    else
-                    {
+                    } else {
                         c = db.contactes.Find(SelectedContacte.contacteId);
 
                         foreach (telefon t in db.telefons.Where(x => x.contacteId == c.contacteId))
@@ -101,20 +85,20 @@ namespace MVVMPractica2.ViewModel
                         }
 
                         db.contactes.Remove(c);
-                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
 
-                        if (TableChoice.Equals("Telefons"))
-                        {
-                            telefonsPopulate();
-                        }
-                        else if (TableChoice.Equals("Emails"))
-                        {
-                            emailsPopulate();
-                        }
-                        else
-                        {
-                            contactesPopulate();
-                        }
+                    if (TableChoice.Equals("Telefons"))
+                    {
+                        telefonsPopulate();
+                    }
+                    else if (TableChoice.Equals("Emails"))
+                    {
+                        emailsPopulate();
+                    }
+                    else
+                    {
+                        contactesPopulate();
                     }
                     break;
                 case "modifyContacte":
@@ -136,32 +120,66 @@ namespace MVVMPractica2.ViewModel
                     }
                     break;
                 case "duplicateContacte":
-                    c = db.contactes.Find(SelectedContacte.contacteId);
-                    contacte c0 = new contacte();
-                    int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault()+1;
-
-                    c0.nom = c.nom;
-                    c0.cognoms = c.cognoms;
-
-                    foreach (email e in c.emails)
+                    if (multipleSel)
                     {
-                        email email0 = new email();
-                        email0.email1 = e.email1;
-                        email0.tipus = e.tipus;
-                        email0.contacteId = new_id;
-                        c0.emails.Add(email0);
-                    }
+                        foreach (contacte co in contactes.Where(x => x.IsSelected))
+                        {
+                            contacte c0 = new contacte();
+                            int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault() + 1;
 
-                    foreach (telefon t in c.telefons)
-                    {
-                        telefon telefon0 = new telefon();
-                        telefon0.telefon1 = t.telefon1;
-                        telefon0.tipus = t.tipus;
-                        telefon0.contacteId = new_id;
-                        c0.telefons.Add(telefon0);
-                    }
+                            c0.nom = co.nom;
+                            c0.cognoms = co.cognoms;
 
-                    db.contactes.Add(c0);
+                            foreach (email e in co.emails)
+                            {
+                                email email0 = new email();
+                                email0.email1 = e.email1;
+                                email0.tipus = e.tipus;
+                                email0.contacteId = new_id;
+                                c0.emails.Add(email0);
+                            }
+
+                            foreach (telefon t in co.telefons)
+                            {
+                                telefon telefon0 = new telefon();
+                                telefon0.telefon1 = t.telefon1;
+                                telefon0.tipus = t.tipus;
+                                telefon0.contacteId = new_id;
+                                c0.telefons.Add(telefon0);
+                            }
+
+                            db.contactes.Add(c0);
+                        }
+
+                        multipleSel = false;
+                    } else {
+                        c = db.contactes.Find(SelectedContacte.contacteId);
+                        contacte c0 = new contacte();
+                        int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault() + 1;
+
+                        c0.nom = c.nom;
+                        c0.cognoms = c.cognoms;
+
+                        foreach (email e in c.emails)
+                        {
+                            email email0 = new email();
+                            email0.email1 = e.email1;
+                            email0.tipus = e.tipus;
+                            email0.contacteId = new_id;
+                            c0.emails.Add(email0);
+                        }
+
+                        foreach (telefon t in c.telefons)
+                        {
+                            telefon telefon0 = new telefon();
+                            telefon0.telefon1 = t.telefon1;
+                            telefon0.tipus = t.tipus;
+                            telefon0.contacteId = new_id;
+                            c0.telefons.Add(telefon0);
+                        }
+
+                        db.contactes.Add(c0);
+                    }
                     db.SaveChanges();
                     TableChoice = "Contacts";
                     break;
