@@ -74,9 +74,9 @@
         <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="250,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r1}" Fill="Yellow"/>
         <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="496,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r2}" Fill="Yellow"/>
 
-        <Button x:Name="addContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="25,405,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="addContacte" IsEnabled="{Binding inverseMultipleSel}" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="25,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="removeContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Remove" HorizontalAlignment="Left" Margin="165,405,0,0" VerticalAlignment="Top" Width="72"/>
-        <Button x:Name="modifyContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="95,405,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="modifyContacte" IsEnabled="{Binding inverseMultipleSel}" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="95,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="duplicateContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Duplicate" HorizontalAlignment="Left" Margin="96,26,0,0" VerticalAlignment="Top" Width="65"/>
 
         <Button x:Name="addTelefon" Command="{Binding BtnTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="266,405,0,0" VerticalAlignment="Top" Width="65"/>

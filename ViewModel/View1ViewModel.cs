@@ -44,15 +44,11 @@ namespace MVVMPractica2.ViewModel
             switch (btName)
             {
                 case "addContacte":
-                    foreach(contacte co in contactes.Where(x => x.IsSelected))
-                    {
-                        Console.WriteLine(co.nom);
-                    }
-                    //c.nom = contacteNom;
-                    //c.cognoms = contacteCognoms;
-                    //db.contactes.Add(c);
-                    //db.SaveChanges();
-                    //TableChoice = "Contacts";
+                    c.nom = contacteNom;
+                    c.cognoms = contacteCognoms;
+                    db.contactes.Add(c);
+                    db.SaveChanges();
+                    TableChoice = "Contacts";
                     break;
                 case "removeContacte":
                     if (multipleSel)
@@ -996,9 +992,22 @@ namespace MVVMPractica2.ViewModel
                     emails = null;
                 }
                 selectMode = value ? "Extended" : "Single";
+                inverseMultipleSel = !value;
                 _multipleSel = value;
                 NotifyPropertyChanged();
             }
         }
+        public bool _inverseMultipleSel { get; set; } = true;
+
+        public bool inverseMultipleSel
+        {
+            get { return _inverseMultipleSel; }
+            set
+            {
+                _inverseMultipleSel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
     }
 }
