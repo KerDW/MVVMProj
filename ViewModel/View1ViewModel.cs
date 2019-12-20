@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MvvmDialogs.ViewModels;
 using MVVMPractica2.Model;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Shapes;
 
 namespace MVVMPractica2.ViewModel
@@ -51,53 +53,61 @@ namespace MVVMPractica2.ViewModel
                     TableChoice = "Contacts";
                     break;
                 case "removeContacte":
-                    foreach (contacte co in contactes.Where(x => x.IsSelected))
+                    OnNewModalDialog();
+                    if (Ok == 1)
                     {
-                        foreach (telefon t in db.telefons.Where(x => x.contacteId == co.contacteId))
+                        foreach (contacte co in contactes.Where(x => x.IsSelected))
                         {
-                            db.telefons.Remove(t);
+                            foreach (telefon t in db.telefons.Where(x => x.contacteId == co.contacteId))
+                            {
+                                db.telefons.Remove(t);
+                            }
+                            foreach (email e in db.emails.Where(x => x.contacteId == co.contacteId))
+                            {
+                                db.emails.Remove(e);
+                            }
+
+                            db.contactes.Remove(co);
                         }
-                        foreach (email e in db.emails.Where(x => x.contacteId == co.contacteId))
+
+                        multipleSel = false;
+
+                        db.SaveChanges();
+
+                        if (TableChoice.Equals("Telefons"))
                         {
-                            db.emails.Remove(e);
+                            telefonsPopulate();
                         }
-
-                        db.contactes.Remove(co);
-                    }
-
-                    multipleSel = false;
-                    
-                    db.SaveChanges();
-
-                    if (TableChoice.Equals("Telefons"))
-                    {
-                        telefonsPopulate();
-                    }
-                    else if (TableChoice.Equals("Emails"))
-                    {
-                        emailsPopulate();
-                    }
-                    else
-                    {
-                        contactesPopulate();
+                        else if (TableChoice.Equals("Emails"))
+                        {
+                            emailsPopulate();
+                        }
+                        else
+                        {
+                            contactesPopulate();
+                        }
                     }
                     break;
                 case "modifyContacte":
-                    c = db.contactes.Find(SelectedContacte.contacteId);
-                    c.nom = contacteNom;
-                    c.cognoms = contacteCognoms;
-                    db.SaveChanges();
-                    if (TableChoice.Equals("Telefons"))
+                    OnNewModalDialog();
+                    if (Ok == 1)
                     {
-                        contacteTelefons();
-                    }
-                    else if (TableChoice.Equals("Emails"))
-                    {
-                        contacteEmails();
-                    }
-                    else
-                    {
-                        contactesPopulate();
+                        c = db.contactes.Find(SelectedContacte.contacteId);
+                        c.nom = contacteNom;
+                        c.cognoms = contacteCognoms;
+                        db.SaveChanges();
+                        if (TableChoice.Equals("Telefons"))
+                        {
+                            contacteTelefons();
+                        }
+                        else if (TableChoice.Equals("Emails"))
+                        {
+                            contacteEmails();
+                        }
+                        else
+                        {
+                            contactesPopulate();
+                        }
                     }
                     break;
                 case "duplicateContacte":
@@ -962,5 +972,76 @@ namespace MVVMPractica2.ViewModel
             }
         }
 
+        private static int nwin = 0;
+
+        public ICommand ModalCommand
+        {
+            get
+            {
+                return new RelayCommand(OnNewModalDialog);
+            }
+        }
+
+        private ObservableCollection<IDialogViewModel> _dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _dialogs; } }
+
+        private string _tb;
+        public string Tb
+        {
+            get { return _tb; }
+            set
+            {
+                _tb = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _ok;
+        public int Ok
+        {
+            get { return _ok; }
+            set
+            {
+                _ok = value;
+                switch (_ok)
+                {
+                    case -1: //cancel
+
+                        break;
+                    case 0: //close
+
+                        break;
+                    case 1: //ok 
+
+                        break;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        public void OnNewModalDialog()
+        {
+            nwin++;
+            this.Dialogs.Add(new DialogWindowViewModel
+            { // inicialitzem les variables del diàleg a mostrar
+                Titol = "Diàleg " + nwin,
+                Tb = this.Tb,
+                OnOk = (sender) =>  //quan acaba el diàleg amb Ok
+                {
+                    Tb = sender.Tb;
+                    Ok = 1;
+                },
+
+                OnCancel = (sender) => //quan acaba el diàleg amb Cancel
+                {
+                    Ok = -1;
+                },
+
+                OnCloseRequest = (sender) => //quan acaba el diàleg amb Close (tancant la finestra)
+                {
+                    Ok = 0;
+                }
+            });
+        }
     }
 }

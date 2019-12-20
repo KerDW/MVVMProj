@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMPractica2"
+        xmlns:dlgs="clr-namespace:MvvmDialogs.Behaviors;assembly=MvvmDialogs"
         xmlns:Model="clr-namespace:MVVMPractica2.Model" 
         xmlns:ViewModel="clr-namespace:MVVMPractica2.ViewModel" 
         x:Class="MVVMPractica2.MainWindow"
+        dlgs:DialogBehavior.DialogViewModels="{Binding Dialogs}"
         mc:Ignorable="d"
         Title="MainWindow" Height="489" Width="762.5">
     <Window.DataContext>
