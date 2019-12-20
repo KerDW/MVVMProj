@@ -55,27 +55,66 @@ namespace MVVMPractica2.ViewModel
                     //TableChoice = "Contacts";
                     break;
                 case "removeContacte":
-                    c = db.contactes.Find(SelectedContacte.contacteId);
-
-                    foreach (telefon t in db.telefons.Where(x => x.contacteId == c.contacteId))
+                    if (multipleSel)
                     {
-                        db.telefons.Remove(t);
+                        foreach (contacte co in contactes.Where(x => x.IsSelected))
+                        {
+                            foreach (telefon t in db.telefons.Where(x => x.contacteId == co.contacteId))
+                            {
+                                db.telefons.Remove(t);
+                            }
+                            foreach (email e in db.emails.Where(x => x.contacteId == co.contacteId))
+                            {
+                                db.emails.Remove(e);
+                            }
+
+                            db.contactes.Remove(co);
+                        }
+                        db.SaveChanges();
+
+                        if (TableChoice.Equals("Telefons"))
+                        {
+                            telefonsPopulate();
+                        }
+                        else if (TableChoice.Equals("Emails"))
+                        {
+                            emailsPopulate();
+                        }
+                        else
+                        {
+                            contactesPopulate();
+                        }
+
+                        multipleSel = false;
                     }
-                    foreach (email e in db.emails.Where(x => x.contacteId == c.contacteId))
+                    else
                     {
-                        db.emails.Remove(e);
-                    }
+                        c = db.contactes.Find(SelectedContacte.contacteId);
 
-                    db.contactes.Remove(c);
-                    db.SaveChanges();
+                        foreach (telefon t in db.telefons.Where(x => x.contacteId == c.contacteId))
+                        {
+                            db.telefons.Remove(t);
+                        }
+                        foreach (email e in db.emails.Where(x => x.contacteId == c.contacteId))
+                        {
+                            db.emails.Remove(e);
+                        }
 
-                    if (TableChoice.Equals("Telefons"))
-                    {
-                        telefonsPopulate();
-                    } else if(TableChoice.Equals("Emails")) {
-                        emailsPopulate();
-                    } else {
-                        contactesPopulate();
+                        db.contactes.Remove(c);
+                        db.SaveChanges();
+
+                        if (TableChoice.Equals("Telefons"))
+                        {
+                            telefonsPopulate();
+                        }
+                        else if (TableChoice.Equals("Emails"))
+                        {
+                            emailsPopulate();
+                        }
+                        else
+                        {
+                            contactesPopulate();
+                        }
                     }
                     break;
                 case "modifyContacte":
@@ -900,6 +939,31 @@ namespace MVVMPractica2.ViewModel
                 NotifyPropertyChanged();
             }
         }
-        
+
+        public string _selectMode { get; set; } = "Single";
+        public string selectMode
+        {
+            get { return _selectMode; }
+            set
+            {
+                _selectMode = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool _multipleSel { get; set; } = false;
+
+        public bool multipleSel
+        {
+            get { return _multipleSel; }
+            set
+            {
+                telefons = null;
+                emails = null;
+                selectMode = value ? "Extended" : "Single";
+                _multipleSel = value;
+                NotifyPropertyChanged();
+            }
+        }
     }
 }
