@@ -715,39 +715,46 @@ namespace MVVMPractica2.ViewModel
         }
         private void telefonsContacte()
         {
-            try {
-                List<int> telIds = new List<int>();
-
-                foreach (var tel in SelectedContacte.telefons)
-                {
-                    telIds.Add(tel.telId);
-                }
-
-                telefons = db.telefons.Where(a => telIds.Contains(a.telId)).OrderBy(a => a.telefon1).ToList();
-                SelectedTelefon = telefons.FirstOrDefault();
-            }
-            catch (Exception e)
+            if (!multipleSel)
             {
-                // there was no selected contacte
+                try
+                {
+                    List<int> telIds = new List<int>();
+
+                    foreach (var tel in SelectedContacte.telefons)
+                    {
+                        telIds.Add(tel.telId);
+                    }
+
+                    telefons = db.telefons.Where(a => telIds.Contains(a.telId)).OrderBy(a => a.telefon1).ToList();
+                    SelectedTelefon = telefons.FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    // there was no selected contacte
+                }
             }
         }
         private void emailsContacte()
         {
-
-            try {
-                List<int> emailIds = new List<int>();
-
-                foreach (var em in SelectedContacte.emails)
-                {
-                    emailIds.Add(em.emailId);
-                }
-
-                emails = db.emails.Where(a => emailIds.Contains(a.emailId)).OrderBy(a => a.email1).ToList();
-                SelectedEmail = emails.FirstOrDefault();
-            }
-            catch (Exception e)
+            if (!multipleSel)
             {
-                // there was no selected contacte
+                try
+                {
+                    List<int> emailIds = new List<int>();
+
+                    foreach (var em in SelectedContacte.emails)
+                    {
+                        emailIds.Add(em.emailId);
+                    }
+
+                    emails = db.emails.Where(a => emailIds.Contains(a.emailId)).OrderBy(a => a.email1).ToList();
+                    SelectedEmail = emails.FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    // there was no selected contacte
+                }
             }
         }
 
