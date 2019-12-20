@@ -121,7 +121,6 @@ namespace MVVMPractica2.ViewModel
                         foreach (contacte co in contactes.Where(x => x.IsSelected))
                         {
                             contacte c0 = new contacte();
-                            int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault() + 1;
 
                             c0.nom = co.nom;
                             c0.cognoms = co.cognoms;
@@ -131,7 +130,6 @@ namespace MVVMPractica2.ViewModel
                                 email email0 = new email();
                                 email0.email1 = e.email1;
                                 email0.tipus = e.tipus;
-                                email0.contacteId = new_id;
                                 c0.emails.Add(email0);
                             }
 
@@ -140,7 +138,6 @@ namespace MVVMPractica2.ViewModel
                                 telefon telefon0 = new telefon();
                                 telefon0.telefon1 = t.telefon1;
                                 telefon0.tipus = t.tipus;
-                                telefon0.contacteId = new_id;
                                 c0.telefons.Add(telefon0);
                             }
 
