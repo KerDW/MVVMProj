@@ -47,11 +47,16 @@
         <TextBox HorizontalAlignment="Left" Height="22" Margin="258,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding telefonTelefon1}"/>
         <Label Content="Telefon" HorizontalAlignment="Left" Margin="256,355,0,0" VerticalAlignment="Top" />
         <Label Content="Tipus" HorizontalAlignment="Left" Margin="352,355,0,0" VerticalAlignment="Top"/>
-        <DataGrid SelectionMode="Single" x:Name="contactesGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="17,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedContacte}" ItemsSource="{Binding contactes}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index}" IsReadOnly="True" >
+        <DataGrid EnableRowVirtualization="False" SelectionMode="{Binding selectMode}" x:Name="contactesGrid" AutoGenerateColumns="false" HorizontalAlignment="Left" Height="251" Margin="17,104,0,0" VerticalAlignment="Top" Width="218" SelectedItem="{Binding SelectedContacte}" ItemsSource="{Binding contactes}" SelectionChanged="DataGrid_SelectionChanged" SelectedIndex="{Binding index}" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding nom}" />
                 <DataGridTextColumn Header="Cognoms" Binding="{Binding cognoms}"/>
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+              <Style TargetType="{x:Type DataGridRow}" >
+                <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+              </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         <Label Content="Filtre" HorizontalAlignment="Left" Margin="17,47,0,0" VerticalAlignment="Top"/>
         <RadioButton GroupName="tables" Content="Contacts" HorizontalAlignment="Left" Margin="17,27,0,0" VerticalAlignment="Top" IsChecked="{Binding ContacteChecked}" Command="{Binding BtnTableCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
@@ -64,13 +69,14 @@
         <TextBox HorizontalAlignment="Left" Height="22" Margin="17,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="{Binding contacteNom}"/>
         <Label Content="Nom" HorizontalAlignment="Left" Margin="15,355,0,0" VerticalAlignment="Top" />
         <Label Content="Cognoms" HorizontalAlignment="Left" Margin="111,355,0,0" VerticalAlignment="Top"/>
-        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="10,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r}" Fill="Yellow"/>
+        
+        <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="4,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r}" Fill="Yellow"/>
         <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="250,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r1}" Fill="Yellow"/>
         <Rectangle IsHitTestVisible="False" HorizontalAlignment="Left" Height="432" Margin="496,10,0,0" VerticalAlignment="Top" Width="241" Opacity="{Binding r2}" Fill="Yellow"/>
 
-        <Button x:Name="addContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="25,405,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="addContacte" IsEnabled="{Binding inverseMultipleSel}" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="25,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="removeContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Remove" HorizontalAlignment="Left" Margin="165,405,0,0" VerticalAlignment="Top" Width="72"/>
-        <Button x:Name="modifyContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="95,405,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="modifyContacte" IsEnabled="{Binding inverseMultipleSel}" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="95,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="duplicateContacte" Command="{Binding BtnContacteCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Duplicate" HorizontalAlignment="Left" Margin="96,26,0,0" VerticalAlignment="Top" Width="65"/>
 
         <Button x:Name="addTelefon" Command="{Binding BtnTelefonCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="266,405,0,0" VerticalAlignment="Top" Width="65"/>
@@ -80,6 +86,8 @@
         <Button x:Name="addEmail" Command="{Binding BtnEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Add" HorizontalAlignment="Left" Margin="504,405,0,0" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="removeEmail" Command="{Binding BtnEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Remove" HorizontalAlignment="Left" Margin="644,405,0,0" VerticalAlignment="Top" Width="72"/>
         <Button x:Name="modifyEmail" Command="{Binding BtnEmailCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Content="Modify" HorizontalAlignment="Left" Margin="574,405,0,0" VerticalAlignment="Top" Width="65"/>
+
+        <CheckBox IsChecked="{Binding multipleSel}" Content="Multiple" HorizontalAlignment="Left" Margin="167,30,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

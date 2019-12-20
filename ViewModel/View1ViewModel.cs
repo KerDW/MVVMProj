@@ -51,26 +51,49 @@ namespace MVVMPractica2.ViewModel
                     TableChoice = "Contacts";
                     break;
                 case "removeContacte":
-                    c = db.contactes.Find(SelectedContacte.contacteId);
-
-                    foreach (telefon t in db.telefons.Where(x => x.contacteId == c.contacteId))
+                    if (multipleSel)
                     {
-                        db.telefons.Remove(t);
-                    }
-                    foreach (email e in db.emails.Where(x => x.contacteId == c.contacteId))
-                    {
-                        db.emails.Remove(e);
-                    }
+                        foreach (contacte co in contactes.Where(x => x.IsSelected))
+                        {
+                            foreach (telefon t in db.telefons.Where(x => x.contacteId == co.contacteId))
+                            {
+                                db.telefons.Remove(t);
+                            }
+                            foreach (email e in db.emails.Where(x => x.contacteId == co.contacteId))
+                            {
+                                db.emails.Remove(e);
+                            }
 
-                    db.contactes.Remove(c);
+                            db.contactes.Remove(co);
+                        }
+
+                        multipleSel = false;
+                    } else {
+                        c = db.contactes.Find(SelectedContacte.contacteId);
+
+                        foreach (telefon t in db.telefons.Where(x => x.contacteId == c.contacteId))
+                        {
+                            db.telefons.Remove(t);
+                        }
+                        foreach (email e in db.emails.Where(x => x.contacteId == c.contacteId))
+                        {
+                            db.emails.Remove(e);
+                        }
+
+                        db.contactes.Remove(c);
+                    }
                     db.SaveChanges();
 
                     if (TableChoice.Equals("Telefons"))
                     {
                         telefonsPopulate();
-                    } else if(TableChoice.Equals("Emails")) {
+                    }
+                    else if (TableChoice.Equals("Emails"))
+                    {
                         emailsPopulate();
-                    } else {
+                    }
+                    else
+                    {
                         contactesPopulate();
                     }
                     break;
@@ -93,32 +116,66 @@ namespace MVVMPractica2.ViewModel
                     }
                     break;
                 case "duplicateContacte":
-                    c = db.contactes.Find(SelectedContacte.contacteId);
-                    contacte c0 = new contacte();
-                    int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault()+1;
-
-                    c0.nom = c.nom;
-                    c0.cognoms = c.cognoms;
-
-                    foreach (email e in c.emails)
+                    if (multipleSel)
                     {
-                        email email0 = new email();
-                        email0.email1 = e.email1;
-                        email0.tipus = e.tipus;
-                        email0.contacteId = new_id;
-                        c0.emails.Add(email0);
-                    }
+                        foreach (contacte co in contactes.Where(x => x.IsSelected))
+                        {
+                            contacte c0 = new contacte();
+                            int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault() + 1;
 
-                    foreach (telefon t in c.telefons)
-                    {
-                        telefon telefon0 = new telefon();
-                        telefon0.telefon1 = t.telefon1;
-                        telefon0.tipus = t.tipus;
-                        telefon0.contacteId = new_id;
-                        c0.telefons.Add(telefon0);
-                    }
+                            c0.nom = co.nom;
+                            c0.cognoms = co.cognoms;
 
-                    db.contactes.Add(c0);
+                            foreach (email e in co.emails)
+                            {
+                                email email0 = new email();
+                                email0.email1 = e.email1;
+                                email0.tipus = e.tipus;
+                                email0.contacteId = new_id;
+                                c0.emails.Add(email0);
+                            }
+
+                            foreach (telefon t in co.telefons)
+                            {
+                                telefon telefon0 = new telefon();
+                                telefon0.telefon1 = t.telefon1;
+                                telefon0.tipus = t.tipus;
+                                telefon0.contacteId = new_id;
+                                c0.telefons.Add(telefon0);
+                            }
+
+                            db.contactes.Add(c0);
+                        }
+
+                        multipleSel = false;
+                    } else {
+                        c = db.contactes.Find(SelectedContacte.contacteId);
+                        contacte c0 = new contacte();
+                        int new_id = db.contactes.OrderByDescending(x => x.contacteId).Select(x => x.contacteId).FirstOrDefault() + 1;
+
+                        c0.nom = c.nom;
+                        c0.cognoms = c.cognoms;
+
+                        foreach (email e in c.emails)
+                        {
+                            email email0 = new email();
+                            email0.email1 = e.email1;
+                            email0.tipus = e.tipus;
+                            email0.contacteId = new_id;
+                            c0.emails.Add(email0);
+                        }
+
+                        foreach (telefon t in c.telefons)
+                        {
+                            telefon telefon0 = new telefon();
+                            telefon0.telefon1 = t.telefon1;
+                            telefon0.tipus = t.tipus;
+                            telefon0.contacteId = new_id;
+                            c0.telefons.Add(telefon0);
+                        }
+
+                        db.contactes.Add(c0);
+                    }
                     db.SaveChanges();
                     TableChoice = "Contacts";
                     break;
@@ -325,12 +382,14 @@ namespace MVVMPractica2.ViewModel
                     ContacteChecked = true;
                     break;
                 case "Telefons":
+                    multipleSel = false;
                     telefonsPopulate();
                     r1 = 0.2;
                     index1 = 0;
                     TelefonChecked = true;
                     break;
                 case "Emails":
+                    multipleSel = false;
                     emailsPopulate();
                     r2 = 0.2;
                     index2 = 0;
@@ -654,39 +713,46 @@ namespace MVVMPractica2.ViewModel
         }
         private void telefonsContacte()
         {
-            try {
-                List<int> telIds = new List<int>();
-
-                foreach (var tel in SelectedContacte.telefons)
-                {
-                    telIds.Add(tel.telId);
-                }
-
-                telefons = db.telefons.Where(a => telIds.Contains(a.telId)).OrderBy(a => a.telefon1).ToList();
-                SelectedTelefon = telefons.FirstOrDefault();
-            }
-            catch (Exception e)
+            if (!multipleSel)
             {
-                // there was no selected contacte
+                try
+                {
+                    List<int> telIds = new List<int>();
+
+                    foreach (var tel in SelectedContacte.telefons)
+                    {
+                        telIds.Add(tel.telId);
+                    }
+
+                    telefons = db.telefons.Where(a => telIds.Contains(a.telId)).OrderBy(a => a.telefon1).ToList();
+                    SelectedTelefon = telefons.FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    // there was no selected contacte
+                }
             }
         }
         private void emailsContacte()
         {
-
-            try {
-                List<int> emailIds = new List<int>();
-
-                foreach (var em in SelectedContacte.emails)
-                {
-                    emailIds.Add(em.emailId);
-                }
-
-                emails = db.emails.Where(a => emailIds.Contains(a.emailId)).OrderBy(a => a.email1).ToList();
-                SelectedEmail = emails.FirstOrDefault();
-            }
-            catch (Exception e)
+            if (!multipleSel)
             {
-                // there was no selected contacte
+                try
+                {
+                    List<int> emailIds = new List<int>();
+
+                    foreach (var em in SelectedContacte.emails)
+                    {
+                        emailIds.Add(em.emailId);
+                    }
+
+                    emails = db.emails.Where(a => emailIds.Contains(a.emailId)).OrderBy(a => a.email1).ToList();
+                    SelectedEmail = emails.FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    // there was no selected contacte
+                }
             }
         }
 
@@ -896,5 +962,52 @@ namespace MVVMPractica2.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        public string _selectMode { get; set; } = "Single";
+        public string selectMode
+        {
+            get { return _selectMode; }
+            set
+            {
+                _selectMode = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool _multipleSel { get; set; } = false;
+
+        public bool multipleSel
+        {
+            get { return _multipleSel; }
+            set
+            {
+                
+                if (value)
+                {
+                    if (!TableChoice.Equals("Contacts"))
+                    {
+                        TableChoice = "Contacts";
+                    }
+                    telefons = null;
+                    emails = null;
+                }
+                selectMode = value ? "Extended" : "Single";
+                inverseMultipleSel = !value;
+                _multipleSel = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public bool _inverseMultipleSel { get; set; } = true;
+
+        public bool inverseMultipleSel
+        {
+            get { return _inverseMultipleSel; }
+            set
+            {
+                _inverseMultipleSel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
     }
 }
