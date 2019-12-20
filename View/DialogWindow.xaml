@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMPractica2"
         xmlns:ViewModel="clr-namespace:MVVMPractica2.ViewModel" x:Class="MVVMPractica2.View.DialogWindow"
-        mc:Ignorable="d" Height="150" Width="250" Title="{Binding Titol}">
+        mc:Ignorable="d" Height="163" Width="309" Title="{Binding Titol}">
     <Window.DataContext>
         <ViewModel:DialogWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="16,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="111" Text="{Binding Tb}"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="16,68,0,0" VerticalAlignment="Top" Width="50" Command="{Binding CancelCommand}" />
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="94,68,0,0" VerticalAlignment="Top" Width="33" RenderTransformOrigin="0.941,0.526" Command="{Binding OkCommand}"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="79,71,0,0" VerticalAlignment="Top" Width="50" Command="{Binding CancelCommand}" />
+        <Button Content="Yes" HorizontalAlignment="Left" Margin="149,71,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.941,0.526" Command="{Binding OkCommand}"/>
+        <Label Content="Are you sure?" HorizontalAlignment="Left" Margin="102,22,0,0" VerticalAlignment="Top" Height="27" Width="85"/>
     </Grid>
 </Window>
