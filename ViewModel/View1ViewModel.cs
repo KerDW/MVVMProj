@@ -386,12 +386,14 @@ namespace MVVMPractica2.ViewModel
                     ContacteChecked = true;
                     break;
                 case "Telefons":
+                    multipleSel = false;
                     telefonsPopulate();
                     r1 = 0.2;
                     index1 = 0;
                     TelefonChecked = true;
                     break;
                 case "Emails":
+                    multipleSel = false;
                     emailsPopulate();
                     r2 = 0.2;
                     index2 = 0;
@@ -983,8 +985,16 @@ namespace MVVMPractica2.ViewModel
             get { return _multipleSel; }
             set
             {
-                telefons = null;
-                emails = null;
+                
+                if (value)
+                {
+                    if (!TableChoice.Equals("Contacts"))
+                    {
+                        TableChoice = "Contacts";
+                    }
+                    telefons = null;
+                    emails = null;
+                }
                 selectMode = value ? "Extended" : "Single";
                 _multipleSel = value;
                 NotifyPropertyChanged();
