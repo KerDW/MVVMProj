@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMPractica2"
+        xmlns:ViewModel="clr-namespace:MVVMPractica2.ViewModel" x:Class="MVVMPractica2.View.DialogWindow"
+        mc:Ignorable="d" Height="163" Width="309" Title="{Binding Titol}">
+    <Window.DataContext>
+        <ViewModel:DialogWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Button Content="No" HorizontalAlignment="Left" Margin="79,71,0,0" VerticalAlignment="Top" Width="50" Command="{Binding CancelCommand}" />
+        <Button Content="Yes" HorizontalAlignment="Left" Margin="149,71,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.941,0.526" Command="{Binding OkCommand}"/>
+        <Label Content="Are you sure?" HorizontalAlignment="Left" Margin="102,22,0,0" VerticalAlignment="Top" Height="27" Width="85"/>
+    </Grid>
+</Window>
