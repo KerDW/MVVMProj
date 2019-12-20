@@ -175,8 +175,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Desktop\MvvmDialogs3\MvvmDialogs\MvvmDialogs.csproj">
-      <Project>{7BE06C50-5544-455F-886D-95322B468E25}</Project>
+    <ProjectReference Include="MvvmDialogs\MvvmDialogs.csproj">
+      <Project>{7be06c50-5544-455f-886d-95322b468e25}</Project>
       <Name>MvvmDialogs</Name>
     </ProjectReference>
   </ItemGroup>
